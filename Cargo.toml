@@ -13,6 +13,7 @@ categories = ["cryptography", "no-std"]
 digest = { version = "0.10", default-features = false }
 cipher = { version = "0.4", default-features = false }
 cmac   = { version = "0.7", default-features = false, optional = true }
+hmac   = { version = "0.12", default-features = false, optional = true }
 streebog = { version = "0.10", default-features = false, optional = true }
 kuznyechik = { version = "0.9.0-rc.3", default-features = false, optional = true }
 
@@ -24,6 +25,8 @@ mac      = ["dep:cmac"]
 streebog = ["dep:streebog"]
 # Re-export Kuznyechik (GOST R 34.12-2015) from the kuznyechik crate
 kuznyechik = ["dep:kuznyechik"]
+# HMAC over Streebog-256 and Streebog-512 (RFC 7836)
+hmac-streebog = ["dep:hmac", "streebog"]
 # std support
 std = ["digest/std", "cipher/std"]
 

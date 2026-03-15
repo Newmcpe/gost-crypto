@@ -100,3 +100,14 @@ pub use streebog;
 /// Implements `cipher::BlockCipherEncrypt + BlockCipherDecrypt + KeyInit`.
 #[cfg(feature = "kuznyechik")]
 pub use ::kuznyechik;
+
+/// HMAC over Streebog-256 and Streebog-512 (RFC 7836 §A.1).
+///
+/// Enabled with feature `hmac-streebog`.
+#[cfg(feature = "hmac-streebog")]
+pub mod hmac_streebog {
+    /// HMAC keyed with Streebog-256.
+    pub type HmacStreebog256 = hmac::Hmac<::streebog::Streebog256>;
+    /// HMAC keyed with Streebog-512.
+    pub type HmacStreebog512 = hmac::Hmac<::streebog::Streebog512>;
+}
