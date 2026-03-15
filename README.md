@@ -14,6 +14,7 @@ Pure-Rust implementation of Russian cryptographic standards, compatible with the
 | GOST R 34.11-94 ([RFC 5831]) | Хэш 256-бит, параметры CryptoPro и Test | всегда |
 | CMAC / OMAC | MAC поверх GOST 28147-89 | `mac` |
 | GOST R 34.11-2012 Стрибог ([RFC 6986]) | Хэш 256 / 512-бит | `streebog` |
+| Кузнечик GOST R 34.12-2015 ([RFC 7801]) | Блочный шифр, 128-бит блок, 256-бит ключ | `kuznyechik` |
 
 - `no_std`
 - Нет `unsafe` кода / No `unsafe` code
@@ -77,6 +78,22 @@ mac.update(b"message");
 let tag = mac.finalize().into_bytes();
 ```
 
+### Kuznyechik (feature `kuznyechik`)
+
+```toml
+gost-crypto = { version = "0.2", features = ["kuznyechik"] }
+```
+
+```rust
+use gost_crypto::kuznyechik::Kuznyechik;
+use gost_crypto::kuznyechik::cipher::{KeyInit, BlockCipherEncrypt};
+
+let key = [0x42u8; 32];
+let c = Kuznyechik::new(&key.into());
+let mut block = [0u8; 16];
+c.encrypt_block((&mut block).into());
+```
+
 ---
 
 ## Cipher Modes / Режимы шифрования
@@ -123,3 +140,4 @@ let ct = enc.encrypt_padded_vec_mut::<Pkcs7>(plaintext);
 [RFC 5830]: https://www.rfc-editor.org/rfc/rfc5830
 [RFC 5831]: https://www.rfc-editor.org/rfc/rfc5831
 [RFC 6986]: https://www.rfc-editor.org/rfc/rfc6986
+[RFC 7801]: https://www.rfc-editor.org/rfc/rfc7801

@@ -93,3 +93,10 @@ pub mod mac {
 /// Enabled with feature `streebog`. Re-exports the `streebog` crate.
 #[cfg(feature = "streebog")]
 pub use streebog;
+
+/// GOST R 34.12-2015 Kuznyechik (Grasshopper) block cipher, 128-bit block, 256-bit key.
+///
+/// Enabled with feature `kuznyechik`. Re-exports the `kuznyechik` crate.
+/// Implements `cipher::BlockCipherEncrypt + BlockCipherDecrypt + KeyInit`.
+#[cfg(feature = "kuznyechik")]
+pub use ::kuznyechik;
