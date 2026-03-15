@@ -1,6 +1,6 @@
 [package]
 name = "gost-crypto"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 description = "GOST 28147-89 block cipher and GOST R 34.11-94 hash — no_std, RustCrypto compatible"
 license = "WTFPL"
