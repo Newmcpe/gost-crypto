@@ -1,0 +1,40 @@
+[package]
+name = "gost-crypto"
+version = "0.2.1"
+edition = "2021"
+description = "GOST 28147-89 block cipher and GOST R 34.11-94 hash — no_std, RustCrypto compatible"
+license = "WTFPL"
+readme = "README.md"
+repository = "https://github.com/Newmcpe/gost-crypto"
+keywords = ["gost", "crypto", "cipher", "hash", "no-std"]
+categories = ["cryptography", "no-std"]
+
+[dependencies]
+digest = { version = "0.10", default-features = false }
+cipher = { version = "0.4", default-features = false }
+cmac   = { version = "0.7", default-features = false, optional = true }
+streebog = { version = "0.10", default-features = false, optional = true }
+
+[features]
+default = []
+# Enable MAC (CMAC/OMAC via cmac crate) for Gost28147
+mac      = ["dep:cmac"]
+# Re-export Streebog (GOST R 34.11-2012) from the streebog crate
+streebog = ["dep:streebog"]
+# std support
+std = ["digest/std", "cipher/std"]
+
+[dev-dependencies]
+hex-literal = "0.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "gost"
+harness = false
+
+[lints.rust]
+missing_docs = "warn"
+
+[lints.clippy]
+all       = { level = "deny", priority = 10 }
+pedantic  = { level = "warn", priority = 3 }
