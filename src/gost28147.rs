@@ -8,7 +8,7 @@
 //! [`KeyInit::new`] uses the **`CryptoPro`** S-box. For other S-boxes use
 //! [`Gost28147::with_sbox`].
 
-use cipher::{KeyInit, KeySizeUser, consts::{U8, U32}};
+use cipher::{BlockCipher, KeyInit, KeySizeUser, consts::{U8, U32}};
 use crate::sbox::{Sbox, SBOX_CRYPTOPRO};
 
 /// Precomputed substitution+rotation table.
@@ -118,6 +118,8 @@ impl Gost28147 {
 impl KeySizeUser for Gost28147 {
     type KeySize = U32;
 }
+
+impl BlockCipher for Gost28147 {}
 
 /// Uses **`CryptoPro`** S-box. For other S-boxes use [`Gost28147::with_sbox`].
 impl KeyInit for Gost28147 {

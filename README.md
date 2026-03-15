@@ -79,6 +79,27 @@ let tag = mac.finalize().into_bytes();
 
 ---
 
+## Cipher Modes / Режимы шифрования
+
+`Gost28147` implements standard `RustCrypto` traits, so any cipher v0.4-compatible mode crate works:
+
+```toml
+[dependencies]
+gost-crypto = "0.2"
+cbc = "0.1"
+```
+
+```rust
+use gost_crypto::Gost28147;
+use cbc::Encryptor;
+use cipher::{KeyIvInit, BlockEncryptMut, block_padding::Pkcs7};
+
+let enc = Encryptor::<Gost28147>::new(&key.into(), &iv.into());
+let ct = enc.encrypt_padded_vec_mut::<Pkcs7>(plaintext);
+```
+
+---
+
 ## S-боксы / S-boxes
 
 Два встроенных параметра:

@@ -14,6 +14,7 @@ digest = { version = "0.10", default-features = false }
 cipher = { version = "0.4", default-features = false }
 cmac   = { version = "0.7", default-features = false, optional = true }
 streebog = { version = "0.10", default-features = false, optional = true }
+kuznyechik = { version = "0.9.0-rc.3", default-features = false, optional = true }
 
 [features]
 default = []
@@ -21,12 +22,18 @@ default = []
 mac      = ["dep:cmac"]
 # Re-export Streebog (GOST R 34.11-2012) from the streebog crate
 streebog = ["dep:streebog"]
+# Re-export Kuznyechik (GOST R 34.12-2015) from the kuznyechik crate
+kuznyechik = ["dep:kuznyechik"]
 # std support
 std = ["digest/std", "cipher/std"]
 
 [dev-dependencies]
 hex-literal = "0.4"
 criterion = { version = "0.5", features = ["html_reports"] }
+cbc      = "0.1"
+ctr      = "0.9"
+cfb-mode = "0.8"
+ofb      = "0.6"
 
 [[bench]]
 name = "gost"
